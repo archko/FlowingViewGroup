@@ -2,3 +2,9 @@ Android example showing one way to do something like a grid view when you don't 
 columns and just want to display a list of things.
 
 An example would be a list of keywords or modifiers of some sort.
+
+archko@gmail.com:
+甚于原项目的bug,无法使用RelativeLayout,所以修改,而且对行的布局进行修改,实现每行居中显示,原来是行第一个高度为准,难免会造成其它的图片重叠.
+
+下一版可能支持每行元素的高布局的Gravity.
+
