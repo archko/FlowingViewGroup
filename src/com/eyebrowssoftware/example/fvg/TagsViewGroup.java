@@ -1,6 +1,18 @@
-/**
- * 
- */
+/*******************************************************************************
+ * Copyright 2013 Archko.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************/
 package com.eyebrowssoftware.example.fvg;
 
 import java.util.Stack;
@@ -390,6 +402,7 @@ public class TagsViewGroup extends ViewGroup {
 		int row = 0;
 		//r -= mPaddingRight;
         r=getWidth()-mPaddingRight;
+        int top=mPaddingTop;
 		for(int i = 0; i < this.getChildCount(); ++i) {
 			View tv = this.getChildAt(i);
             if (tv.getVisibility()==GONE){
@@ -399,18 +412,19 @@ public class TagsViewGroup extends ViewGroup {
 			int height = tv.getMeasuredHeight();
 			if((pos + width + mHorizontalSpacing) > r) {
 				pos = mPaddingLeft;
-				++row; 
+                top=+mRowsHeight.get(row)+mVerticalSpacing*(row+1);   //all top
+				++row;
 			}
             /*Log.d(TAG, "layout row:"+row+" pos:"+pos+" width:"+width+" mHSpacing:"+
                 mHorizontalSpacing+" r:"+r+" mw:"+getWidth()+" mVSpacing:"+ mVerticalSpacing+" height:"+height+" allh:"+getHeight());*/
 
             int rowHeight=mRowsHeight.get(row);
-            int allHeight=0;
+            /*int allHeight=0;
             for(int j=0;j<row;j++){
                 allHeight+=mRowsHeight.get(j);
-            }
+            }*/
 			//int child_top = mPaddingTop + row * (height + mVerticalSpacing);
-            int child_top=(rowHeight-height)/2+allHeight+mPaddingTop+mVerticalSpacing*row;
+            int child_top=(rowHeight-height)/2+top;
 			tv.layout(pos, child_top, pos + width, child_top + height);
 			// Log.d(TAG, "child: Top = " + String.valueOf(child_top) + "Bottom: " + String.valueOf(child_top+height) 
 			//		+ " Left = " + String.valueOf(pos) + " Right = " + String.valueOf(pos + width));
